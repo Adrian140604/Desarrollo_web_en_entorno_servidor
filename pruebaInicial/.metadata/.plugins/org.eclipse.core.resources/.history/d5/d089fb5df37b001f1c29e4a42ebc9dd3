@@ -1,0 +1,8 @@
+package evaluacionInicial;
+
+public class Colegio {
+	String alumno;
+	String nacionalidad;
+	
+
+}

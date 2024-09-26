@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+/home/estudiante/Desktop/2-Daw/Desarrollo_web_en_entorno_servidor/pruebaInicial/.metadata/.plugins/org.eclipse.jdt.core
+219703937.index
+2740781281.index
+1865797976.index

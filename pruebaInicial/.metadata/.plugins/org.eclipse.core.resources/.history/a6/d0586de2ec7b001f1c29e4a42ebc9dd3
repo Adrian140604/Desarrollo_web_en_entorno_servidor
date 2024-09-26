@@ -1,0 +1,32 @@
+package evaluacionInicial;
+
+import java.util.Scanner;
+
+public class Ejercicio1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner (System.in);
+		System.out.println("Introduzca un numero: ");
+		int numero=sc.nextInt(); //Un numero es primo cuando solo es divisible por el mismo y por uno
+		int contador=0;
+		for(int i=1;i<numero+1;i++) {
+			if(numero%i==0) {
+				contador++;
+				if(i==1||i==numero && contador!=0) {
+					contador--;
+					
+				}
+				
+			}
+		}
+		
+		if(contador>0) {
+			System.out.println("EL numero: "+numero+" es primo");
+		}
+		else {
+			System.out.println("EL numero: "+numero+" no es primo");
+		}
+
+	}
+
+}

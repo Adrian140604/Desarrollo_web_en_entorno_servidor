@@ -1,0 +1,27 @@
+package evaluacionInicial;
+
+public class Colegio {
+	
+	private String nacionalidad;
+	
+	
+	//Getters and Setters
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+	//Constructores
+	public Colegio(String alumno, String nacionalidad) {
+		super();
+		this.alumno = alumno;
+		this.nacionalidad = nacionalidad;
+	}
+	
+	
+	
+	
+	
+
+}

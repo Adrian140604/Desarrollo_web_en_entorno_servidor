@@ -1,0 +1,28 @@
+package evaluacionInicial;
+
+import java.util.List;
+
+public class Colegio {
+	
+	List nacionalidades=new Arraylist();
+	
+	
+	//Getters and Setters
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+	//Constructores
+	public Colegio(String alumno, String nacionalidad) {
+		super();
+		this.nacionalidad = nacionalidad;
+	}
+	
+	
+	
+	
+	
+
+}
