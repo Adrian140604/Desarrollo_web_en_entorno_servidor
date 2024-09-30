@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Hola,bienvenido</h1>
-    <form action="procesarFormulario.php" method="post">
+    <form action="procesarFormulario.php" method="get">
         <div>
             Introduce tu nombre: <input type=text name="nombre" id="nombre" required>
         </div>

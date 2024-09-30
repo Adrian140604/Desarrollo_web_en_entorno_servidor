@@ -8,12 +8,11 @@
 <body>
     <?php
         
-        print ("Bienvenido ".htmlspecialchars($_GET["nombre"])." ".htmlspecialchars($_GET["apellido"])); //Asi se obtiene el nombre y el apellido, entre []se pone el nombre del campo que le hemos puesto
+        print ("Bienvenido ".htmlspecialchars($_GET["nombre"])."<br>"); //Asi se obtiene el nombre y el apellido, entre []se pone el nombre del campo que le hemos puesto
         //El punto funciona como una concatenacion
         //El htmlspecialchars() es una funcion que lo que hace es que no colapse el programa al poner caracteres especiales o bien cosas entre comillas
         $edad=intval($_GET["edad"]);
         //El intval pasa a numero lo que haya dentro del parentesis
-        var_dump(value:$edad);
         if($edad >= 18 ){
             print("Es mayor de edad");
         }
