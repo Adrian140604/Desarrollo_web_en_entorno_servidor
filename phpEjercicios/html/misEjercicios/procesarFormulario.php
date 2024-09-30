@@ -13,12 +13,24 @@
         //El htmlspecialchars() es una funcion que lo que hace es que no colapse el programa al poner caracteres especiales o bien cosas entre comillas
         $edad=intval($_GET["edad"]);
         //El intval pasa a numero lo que haya dentro del parentesis
-        if($edad >= 18 ){
-            print("Es mayor de edad");
+        if(is_numeric(($_GET["nombre"]))){
+            echo("El nombre no puede ser un numero");
+        }
+        if(empty($_GET["nombre"])){
+            echo("El nombre esta vacio");
+        }
+        if(empty($_GET["edad"])){
+            echo("La edad no puede estar vacia");
         }
         else{
-            print("Es menor de edad");
+            if($edad >= 18 ){
+                print("Es mayor de edad");
+            }
+            else{
+                print("Es menor de edad");
+            }
         }
+        
     ?>
 
 </body>
