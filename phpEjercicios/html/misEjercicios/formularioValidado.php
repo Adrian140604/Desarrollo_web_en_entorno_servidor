@@ -33,10 +33,25 @@
 
     <?php
     if(isset($_GET["numero"])){
+      if ( !is_numeric($_GET["numero"])){
+        echo"El valor introducido no es un numero";
+      }
+      else{
         $numero=intval($_GET["numero"]);
+        for($i=0;$i<=10;$i++){
+          echo $numero." x ".$i." = ".$numero*$i."<br>";
+        }
+      }
+      
+      
+    }
+    
+    else if (empty($_GET["numero"])){
+      echo "El valor introducido esta vacio";
+
     }
     else{
-        echo "No ha introducido ";
+      echo "No ha introducido ningun valor";
     }
     ?>
 </div>
