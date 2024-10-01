@@ -37,6 +37,9 @@
             if($_GET["genero"]!="Masculino"&&$_GET["genero"]!="Femenino"&&$_GET["genero"]!="Otro"){
                 echo"El genero introducido no es valido";
             }
+            if($_GET["hobby"]!="Leer"&&$_GET["hobby"]!="Cerveza"&&$_GET["hobby"]!="Videojuegos"&&$_GET["hobby"]!="Viajar"&&$_GET["hobby"]!="Deportes"){
+                echo "El hobby seleccionado es invalido";
+            }
         }
 
     }
