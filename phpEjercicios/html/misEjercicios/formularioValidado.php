@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<?php
+    if(isset($_GET["numero"])){
+      if ( !is_numeric($_GET["numero"])){
+        echo"El valor introducido no es un numero";
+      }
+      else{
+        $numero=intval($_GET["numero"]);
+        for($i=0;$i<=10;$i++){
+          echo $numero." x ".$i." = ".$numero*$i."<br>";
+        }
+      }
+      
+      
+    }
+    
+    else if (empty($_GET["numero"])){
+      echo "El valor introducido esta vacio";
+
+    }
+    else{
+      echo "No ha introducido ningun valor";
+    }
+    ?>
 <form method="get">
   <div class="form-group row">
     <label for="text" class="col-4 col-form-label">Numero a multiplicar</label> 
@@ -31,29 +54,7 @@
 <div>
 
 
-    <?php
-    if(isset($_GET["numero"])){
-      if ( !is_numeric($_GET["numero"])){
-        echo"El valor introducido no es un numero";
-      }
-      else{
-        $numero=intval($_GET["numero"]);
-        for($i=0;$i<=10;$i++){
-          echo $numero." x ".$i." = ".$numero*$i."<br>";
-        }
-      }
-      
-      
-    }
-    
-    else if (empty($_GET["numero"])){
-      echo "El valor introducido esta vacio";
-
-    }
-    else{
-      echo "No ha introducido ningun valor";
-    }
-    ?>
+ 
 </div>
 
 </body>
