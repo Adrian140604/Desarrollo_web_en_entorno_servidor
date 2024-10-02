@@ -10,42 +10,49 @@
 </head>
 <body>
     <?php
+    $errores=[];
     if(isset($_GET["nombre"])||isset($_GET["edad"])||isset($_GET["correo"])||isset($_GET["genero"])||isset($_GET["pais"])||isset($_GET["hobby"])){
         if(empty($_GET["nombre"])||empty($_GET["edad"])||empty($_GET["correo"])||empty($_GET["genero"])||empty($_GET["pais"])||empty($_GET["hobby"])){
-            echo "Algun campo no esta relleno";
+            $errores[]= "Algun campo no esta relleno"."<br>";
         }
         else{
             if(is_numeric($_GET["edad"])){
                 $edad=intval($_GET["edad"]);
                 if($edad<0|| $edad> 100){
-                    echo "La edad tiene que estar comprendida entre 0 y 100";
+                  $errores[]="La edad tiene que estar comprendida entre 0 y 100"."<br>";
                 }
                 else{
                     if($edad>=18){
-                        echo "El usuario ".strtoupper($_GET["nombre"])." es mayor de edad";
+                       $errores[]="El usuario ".strtoupper($_GET["nombre"])." es mayor de edad"."<br>";
                     }
                     else{
-                        echo "El usuario ".strtoupper($_GET["nombre"])." es menor de edad";
+                      $errores[]= "El usuario ".strtoupper($_GET["nombre"])." es menor de edad"."<br>";
                     }
                 }
 
 
             }
             else{
-                echo "La edad debe ser un valor numerico";
+              $errores[]= "La edad debe ser un valor numerico"."<br>";
             }
-            if($_GET["genero"]!="Masculino"&&$_GET["genero"]!="Femenino"&&$_GET["genero"]!="Otro"){
-                echo"El genero introducido no es valido";
+            if($_GET["genero"]!="masculino"&&$_GET["genero"]!="femenino"&&$_GET["genero"]!="otro"){
+                $errores[]="El genero introducido no es valido"."<br>";
             }
-            if($_GET["hobby"]!="Leer"&&$_GET["hobby"]!="Cerveza"&&$_GET["hobby"]!="Videojuegos"&&$_GET["hobby"]!="Viajar"&&$_GET["hobby"]!="Deportes"){
-                echo "El hobby seleccionado es invalido";
+            if($_GET["hobby"]!="leer"&&$_GET["hobby"]!="cerveza"&&$_GET["hobby"]!="videojuegos"&&$_GET["hobby"]!="viajar"&&$_GET["hobby"]!="deportes"){
+              $errores[]= "El hobby seleccionado es invalido"."<br>";
             }
         }
 
     }
     else{
-        echo"Faltan datos por rellenar";
+        $errores[]="Faltan datos por rellenar"."<br>";
     }
+    
+    foreach($errores as $error){
+      echo "- ".$error."<br>";
+
+    }
+    //Esto debemos corregirlo para que los errores no salgan de uno en uno si no que salgan todos 
 
 
     ?>
