@@ -20,7 +20,6 @@
         }
       }
       
-      
     }
     
     else if (empty($_GET["numero"])){
