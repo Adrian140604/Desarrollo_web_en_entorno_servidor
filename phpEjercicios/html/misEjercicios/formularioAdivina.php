@@ -18,6 +18,7 @@
                     if($_GET["numero"]==$numeroA){
                         echo"Acertastes";
                     }
+                    
                 }
                 
                 
