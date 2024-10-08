@@ -1,3 +1,60 @@
+<?php
+    session_start();
+    $errores=[];
+    if (!isset($_SESSION["numeroAleatorio"])) {
+      $_SESSION["numeroAleatorio"] = rand(1, 100);
+    }
+  if (!isset($_SESSION["contador"])) {
+      $_SESSION["contador"] = 0;
+    }
+    if(!isset(($_GET["numero"]))){
+      $errores[]="No hay ningun valor enviado";
+    }
+    if(empty($_GET["numero"])){
+      $errores[]= "El valor esta vacio";
+    }
+    if (!isset($_SESSION["numeroAleatorio"])){
+      $errores[]= "No hay un numero aleatorio a adivinar";
+    }
+    if (!isset($_SESSION["numeroAleatorio"])){
+      $errores[]= "No hay un numero aleatorio a adivinar";
+    }
+    if (empty($_SESSION["numeroAleatorio"])){
+      $errores[]= "El numero aleatorio a adivinar esta vacio";
+    }
+    if (!is_numeric(value: $_GET["numero"])){
+      $errores[]= "El numero introducido no es un numero";
+    }
+    if (!is_numeric($_SESSION["numeroAleatorio"])){
+      $errores[]= "El numero introducido no es un numero";
+    }
+
+    if(isset($_SESSION["numeroAleatorio"])&&isset($_GET["numero"])&&!empty($_GET["numero"])&&!empty($_SESSION["numeroAleatorio"])&&is_numeric($_SESSION["numeroAleatorio"])&&is_numeric($_GET["numero"])){
+      if($_GET["numero"]<$_SESSION["numeroAleatorio"]){
+        echo "El numero es mayor";
+        $_SESSION["contador"]++;
+      }
+      else if($_GET["numero"]>$_SESSION["numeroAleatorio"]){
+        echo "El numero es menor";
+        $_SESSION["contador"]++;
+      }
+      else{
+        echo "Felicidades has acertado!";
+        echo "Numero de intentos:$_SESSION[contador]";
+       
+        session_destroy();
+
+      }
+
+    }
+
+    if (!empty($errores)) {
+      foreach ($errores as $error) {
+          echo "-" . $error . "<br>";
+      }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,37 +66,7 @@
 
 </head>
 <body>
-    <?php
-        $errores=[];
-        if(isset($_GET["numero"])){
-            if(!empty($_GET["numero"])){
-                if(is_numeric($_GET["numero"])){
-                    $numeroA=(rand(1,100));
-                    if($_GET["numero"]==$numeroA){
-                        echo"Acertastes";
-                    }
-                }
-                
-                
-            }
-        }
-        else{
-            if(!isset($_GET["numero"])){
-                $errores[]="Faltan valores por enviar";
-            }
-            else if(empty($_GET["numero"])){
-                $errores[]= "El campo esta vacio";
-            }
-            else{
-                $errores[]= "El valor no es un numero";
-            }
-        }
-        if (!empty($errores)) {
-            foreach ($errores as $error) {
-                echo "-" . $error . "<br>";
-            }
-        }
-    ?>
+  
 <form method="get">
   <div class="form-group row">
     <label for="numero" class="col-4 col-form-label">Numero</label> 
