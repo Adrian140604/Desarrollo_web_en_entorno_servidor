@@ -12,9 +12,7 @@
 <?php
     $errores = [];
 
-    // Verifica si los campos "usuario" y "contrasenia" han sido enviados
     if (isset($_GET["usuario"]) && isset($_GET["contrasenia"])) {
-        // Verifica si los campos no están vacíos
         if (empty($_GET["usuario"])) {
             $errores[] = "El campo usuario está vacío";
         }
@@ -23,7 +21,6 @@
             $errores[] = "El campo contraseña está vacío";
         }
         
-        // Solo verifica usuario y contraseña si ambos no están vacíos
         if (!empty($_GET["usuario"]) && !empty($_GET["contrasenia"])) {
             if ($_GET["usuario"] == "root" && $_GET["contrasenia"] == "root") {
                 echo "Bienvenido";
@@ -32,7 +29,6 @@
             }
         }
     } else {
-        // Si no se enviaron los campos requeridos
         if (!isset($_GET["usuario"])) {
             $errores[] = "Falta el campo usuario";
         }
@@ -41,7 +37,6 @@
         }
     }
 
-    // Muestra todos los errores encontrados
     if (!empty($errores)) {
         foreach ($errores as $error) {
             echo "-" . $error . "<br>";

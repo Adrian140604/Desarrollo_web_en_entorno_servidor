@@ -10,12 +10,11 @@
 <body>
     <?php
     $errores = [];
-    // Verifica si el parámetro "numero" ha sido enviado
-    if (isset($_GET["numero"])) {
-        // Verifica si el campo no está vacío (incluyendo el número 0 como válido)
-        if ($_GET["numero"] !== "") {
+    if(isset ($_GET["submit"])){
+      if (isset($_GET["numero"])) {
+        if (!empty($_GET["numero"])||$_GET["numero"]==0) {
+          if(is_numeric($_GET["numero"])){
             $numero = $_GET["numero"];
-            // Verifica si es un número mayor que 0, menor que 0 o igual a 0
             if ($numero > 0) {
                 echo "El número es positivo.";
             } elseif ($numero < 0) {
@@ -23,15 +22,23 @@
             } else {
                 echo "El número es 0.";
             }
+
+          }
+          else{
+            $errores[] = "El campo no es un numero";
+
+          }
+          
         } else {
             $errores[] = "El campo está vacío.";
         }
     } else {
-        // Si no se envió el parámetro "numero"
         $errores[] = "Faltan valores para introducir.";
     }
 
-    // Muestra los errores, si existen
+    }
+    
+
     if (!empty($errores)) {
         foreach ($errores as $error) {
             echo "-" . $error . "<br>";
@@ -49,7 +56,7 @@
                 <i class="fa fa-balance-scale"></i>
               </div>
             </div> 
-            <input id="numero" name="numero" type="number" class="form-control">
+            <input id="numero" name="numero" type="number" class="form-control" required>
           </div>
         </div>
       </div> 

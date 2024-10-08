@@ -66,7 +66,6 @@
 
 </head>
 <body>
-  
 <form method="get">
   <div class="form-group row">
     <label for="numero" class="col-4 col-form-label">Numero</label> 
