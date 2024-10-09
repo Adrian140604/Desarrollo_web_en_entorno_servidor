@@ -1,52 +1,40 @@
 <?php
     session_start();
     $errores=[];
-    if (!isset($_SESSION["numeroAleatorio"])) {
+    if (!isset($_SESSION["numeroAleatorio"])||!isset($_GET["submit"])) {
       $_SESSION["numeroAleatorio"] = rand(1, 100);
-    }
-  if (!isset($_SESSION["contador"])) {
       $_SESSION["contador"] = 0;
     }
-    if(!isset(($_GET["numero"]))){
-      $errores[]="No hay ningun valor enviado";
-    }
-    if(empty($_GET["numero"])){
-      $errores[]= "El valor esta vacio";
-    }
-    if (!isset($_SESSION["numeroAleatorio"])){
-      $errores[]= "No hay un numero aleatorio a adivinar";
-    }
-    if (!isset($_SESSION["numeroAleatorio"])){
-      $errores[]= "No hay un numero aleatorio a adivinar";
-    }
-    if (empty($_SESSION["numeroAleatorio"])){
-      $errores[]= "El numero aleatorio a adivinar esta vacio";
-    }
-    if (!is_numeric(value: $_GET["numero"])){
-      $errores[]= "El numero introducido no es un numero";
-    }
-    if (!is_numeric($_SESSION["numeroAleatorio"])){
-      $errores[]= "El numero introducido no es un numero";
-    }
-
-    if(isset($_SESSION["numeroAleatorio"])&&isset($_GET["numero"])&&!empty($_GET["numero"])&&!empty($_SESSION["numeroAleatorio"])&&is_numeric($_SESSION["numeroAleatorio"])&&is_numeric($_GET["numero"])){
-      if($_GET["numero"]<$_SESSION["numeroAleatorio"]){
-        echo "El numero es mayor";
-        $_SESSION["contador"]++;
+    if(isset($_GET["submit"])){
+      if(!isset(($_GET["numero"]))){
+        $errores[]="No hay ningun valor enviado";
       }
-      else if($_GET["numero"]>$_SESSION["numeroAleatorio"]){
-        echo "El numero es menor";
-        $_SESSION["contador"]++;
+      else if(empty($_GET["numero"])){
+        $errores[]= "El valor esta vacio";
+      }
+      else if (!is_numeric(value: $_GET["numero"])){
+        $errores[]= "El numero introducido no es un numero";
       }
       else{
-        echo "Felicidades has acertado!";
-        echo "Numero de intentos:$_SESSION[contador]";
-       
-        session_destroy();
-
+        $_SESSION["contador"]++;
+        echo"Llevas: $_SESSION[contador] intentos";
+        if($_GET["numero"]<$_SESSION["numeroAleatorio"]){
+          echo "El numero es mayor";
+        }
+        else if($_GET["numero"]>$_SESSION["numeroAleatorio"]){
+          echo "El numero es menor";
+        }
+        else{
+          echo "Felicidades has acertado!";
+          echo "Numero de intentos:$_SESSION[contador]";
+         
+          session_destroy();
+  
+        }
+  
       }
-
-    }
+    }  
+    
 
     if (!empty($errores)) {
       foreach ($errores as $error) {
