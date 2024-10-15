@@ -1,45 +1,58 @@
 <?php
 session_start();
-$errores=[];
-$palabras=["MANZANA","TELESCOPIO","MOVIL","JUEZ","SANDRIA","ORDENADOR","TECLADO","CRUPIER","SILLA","ARMARIO"];
-$_SESSION["intentos"]=0;
-if(!isset($_SESSION["palabraAdivinar"])||!isset($_SESSION["longitudPalabraAdivinar"])){ //Aqui ponemos la condicion que solo cambie3 en el caso de que no este asignado, osea una vez se inicia el programa
-  $_SESSION["palabraAdivinar"]=$palabras[rand(min: 0, max: 9)];
+
+// Inicializamos el array de errores
+$errores = [];
+
+// Lista de palabras a adivinar
+$palabras = ["TELEFONO", "LAPIZ", "HOMBRE", "MUJER", "TELEVISOR", "CONSOLA", "LIBRO", "BETIS", "BRAZO", "TECLADO"];
+
+// Verificamos si ya existe una palabra a adivinar en la sesión
+if (!isset($_SESSION["palabraAdivinar"])) {
+    // Si no hay una palabra guardada en la sesión, seleccionamos una aleatoria
+    $_SESSION["palabraAdivinar"] = $palabras[rand(0, count($palabras) - 1)];
 }
 
-if(!isset($_GET["submit"])){
-  for($i=0;$i<strlen($_SESSION["palabraAdivinar"]);$i++){
-    $_SESSION["mostrar"].="-";
-  }
-  echo $_SESSION["mostrar"];
+// Guardamos la palabra seleccionada
+$palabraAdivinar = $_SESSION["palabraAdivinar"];
+$longitudPalabra = strlen($palabraAdivinar);
+
+// Inicializamos los huecos si no están definidos
+if (!isset($_SESSION["huecos"])) {
+    $_SESSION["huecos"] = str_repeat("-", $longitudPalabra);
 }
 
-if(!isset($_GET["palabra"])){
-  $errores[]="No hay datos enviados";
-}
-else if (empty($_GET["palabra"])){
-  $errores[]="Hay valores vacios";
-}
-else{
-  if(isset($_GET["submit"])){
-    $_SESSION["longitudPalabraEsperada"]=strlen($_GET["palabra"]);
-    
-    for($i=0;$i<strlen($_SESSION["palabraAdivinar"]);$i++){     //Esto mide la longitud de la palabra
-        if($_SESSION["palabraAdivinar"][$i]==$_GET["palabra"][$i]){
-          $_SESSION["mostrar"].=$_SESSION["palabraAdivinar"][$i];
+// Verificar si la palabra ha sido enviada por el formulario
+if (isset($_GET["submit"])) {       
+    $palabraIngresada = strtoupper(trim($_GET["palabra"])); // Convertimos a mayúsculas para hacer la comparación más fácil
+
+    if (empty($palabraIngresada)) {
+        $errores[] = "La cadena está vacía";
+    } else if ($palabraIngresada == $palabraAdivinar) {
+        echo "<br>HAS ACERTADO";
+        session_destroy(); // Reiniciar juego
+    } else if (strlen($palabraIngresada) == 1) {   
+        for ($i = 0; $i < $longitudPalabra; $i++) {
+            if ($palabraAdivinar[$i] == $palabraIngresada) {
+                // Reemplaza el guion en la posición correspondiente
+                $_SESSION["huecos"][$i] = $palabraIngresada;
+            }
         }
-        else{
-          $_SESSION["mostrar"].="-";
-        }
-      
+        // Imprimir la cadena huecos correctamente
+        echo "<br>" . $_SESSION["huecos"];
+    } else {
+        echo "<br>Intenta de nuevo";
     }
-    echo $_SESSION["mostrar"];
-  }
-
+} else {
+    $errores[] = "No se puede enviar la cadena vacía";
 }
 
-
-
+// Mostrar errores si existen
+if (!empty($errores)) {
+    foreach ($errores as $error) {
+        echo "<br>" . $error;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
