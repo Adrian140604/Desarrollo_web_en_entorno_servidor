@@ -22,38 +22,71 @@ if (isset($_GET["id"])) {
     }
 }
 
-function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){
-    if($_GET["accion"]=="eliminar"||$_GET["accion"]=="verMas"){
-        echo"<div class=\"form-group\">
-                <label for=\"id\">ID</label>
-                <input type=\"text\" class=\"form-control\" id=\"id\" placeholder=<?php echo $id;?> disabled>
+function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Recordar que no puede haber codigo html dentro de php, es decir con un echo sio que se puede pero al tener funciones php dentro podemos hacerlo asi 
+    if($_GET["accion"]=="eliminar"||$_GET["accion"]=="verMas"){?>
+        <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" placeholder=<?php echo $id;?> disabled>
             </div>
-            <div class=\"form-group\">
-                <label for=\"nombre\">Nombre</label>
-                <input type=\"text\" class=\"form-control\" id=\"nombre\" placeholder=<?php echo $nombre;?> disabled>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder=<?php echo $nombre;?> disabled>
             </div>
-            <div class=\"form-group\">
-                <label for=\"apellidos\">Apellidos</label>
-                <input type=\"text\" class=\"form-control\" id=\"apellidos\" placeholder=<?php echo $apellidos;?> disabled>
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" placeholder=<?php echo $apellidos;?> disabled>
             </div>
-            <div class=\"form-group\">
-                <label for=\"email\">Email</label>
-                <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=<?php echo $email;?> disabled>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder=<?php echo $email;?> disabled>
             </div>
-            <div class=\"form-group\">
-                <label for=\"genero\">Género</label>
-                <select class=\"form-control\" id=\"genero\" disabled>
-                    <option value=\"\"><?php echo $genero;?></option>
-                    <option value=\"masculino\">Masculino</option>
-                    <option value=\"femenino\">Femenino</option>
-                    <option value=\"otro\">Otro</option>
+            <div class="form-group">
+                <label for="genero">Género</label>
+                <select class="form-control" id="genero" disabled>
+                    <option value=""><?php echo $genero;?></option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
                 </select>
             </div>
-            <div class=\"form-group\">
-                <label for=\"contraseña\">Contraseña</label>
-                <input type=\"password\" class=\"form-control\" id=\"contraseña\" placeholder=<?php echo $contrasenia;?> disabled>
-            </div>";
-    }
+            <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" placeholder=<?php echo $contrasenia;?> disabled>
+  
+          </div>
+<?php   }
+    else{?>
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" value=<?php echo $id;?> >
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" value=<?php echo $nombre;?> >
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" value=<?php echo $apellidos;?> >
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value=<?php echo $email;?> >
+            </div>
+            <div class="form-group">
+                <label for="genero">Género</label>
+                <select class="form-control" id="genero" >
+                    <option value=""><?php echo $genero;?></option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" placeholder=<?php echo $contrasenia;?> >
+            </div>
+<?php   }
+    
 
 }
 ?>
