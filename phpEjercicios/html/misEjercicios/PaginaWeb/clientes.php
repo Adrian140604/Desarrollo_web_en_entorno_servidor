@@ -1,5 +1,5 @@
 <?php
-$data = [
+$_SESSION['data']= [
     [
         'id' => 1,
         'name' => 'Merola',

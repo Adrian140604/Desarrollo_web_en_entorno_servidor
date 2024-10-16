@@ -23,6 +23,18 @@ if (isset($_GET["id"])) {
 }
 
 function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Recordar que no puede haber codigo html dentro de php, es decir con un echo sio que se puede pero al tener funciones php dentro podemos hacerlo asi 
+    switch($_GET["accion"]){
+        case "eliminar":
+            echo "<h2 class=\"text-center mb-4\">Borrando Cliente</h2>";
+            break;
+        case "verMas":
+            echo "<h2 class=\"text-center mb-4\">Mostrando Cliente</h2>";
+            break;
+        case "editar":
+            echo "<h2 class=\"text-center mb-4\">Editando Cliente</h2>";
+            break;
+
+    }
     if($_GET["accion"]=="eliminar"||$_GET["accion"]=="verMas"){?>
         <div class="form-group">
                 <label for="id">ID</label>
@@ -96,13 +108,11 @@ function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Rec
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Registro</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container my-4">
-        <h2 class="text-center mb-4">Registro de Usuario</h2>
-        <form action="indexCliente.php">
+        <form action="indexCliente.php" method="post">
             <?php
                 valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia);
                 if($_GET["accion"]=="eliminar"){

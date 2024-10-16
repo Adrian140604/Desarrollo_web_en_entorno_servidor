@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
             </thead>
             <tbody>
                 <?php
-                foreach($data as $dni => $cliente) { // Esto recorre data que es lo que hemos importado
+                foreach($_SESSION['data'] as $dni => $cliente) { // Esto recorre data que es lo que hemos importado
                     echo "<tr>";
                     echo "<td>{$cliente['id']}</td>"; // Las llaves son para decirle que va a ir una variable
                     echo "<td>{$cliente['name']}</td>";
