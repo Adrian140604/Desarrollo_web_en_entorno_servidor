@@ -1,28 +1,11 @@
 <?php
-include("clientes.php");
-$id = 0;
-$nombre = "";
-$apellidos = "";
-$email = "";
-$genero = "";
-$contrasenia = "";
+session_start();
+require_once("clientes.php");
+require_once("eliminarCliente.php");
+require_once("utility.php");
+$cliente=findCliente($_SESSION['data'], $_GET['id']);
 
-
-if (isset($_GET["id"])) {
-    foreach ($data as $cliente) { 
-        if ($_GET["id"] == $cliente['id']) {
-            $id = $cliente['id'];
-            $nombre = $cliente['name'];
-            $apellidos = $cliente['surname'];
-            $email = $cliente['email'];
-            $genero = $cliente['gender'];
-            $contrasenia = $cliente['address']; 
-            break; 
-        }
-    }
-}
-
-function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Recordar que no puede haber codigo html dentro de php, es decir con un echo sio que se puede pero al tener funciones php dentro podemos hacerlo asi 
+function valoraAccion($cliente){ //Recordar que no puede haber codigo html dentro de php, es decir con un echo sio que se puede pero al tener funciones php dentro podemos hacerlo asi 
     switch($_GET["accion"]){
         case "eliminar":
             echo "<h2 class=\"text-center mb-4\">Borrando Cliente</h2>";
@@ -38,64 +21,64 @@ function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Rec
     if($_GET["accion"]=="eliminar"||$_GET["accion"]=="verMas"){?>
         <div class="form-group">
                 <label for="id">ID</label>
-                <input type="text" class="form-control" id="id" placeholder=<?php echo $id;?> disabled>
+                <input type="text" class="form-control" id="id" placeholder=<?php echo $cliente['id'];?> disabled>
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder=<?php echo $nombre;?> disabled>
+                <input type="text" class="form-control" id="nombre" placeholder=<?php echo $cliente['name'];?> disabled>
             </div>
             <div class="form-group">
                 <label for="apellidos">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" placeholder=<?php echo $apellidos;?> disabled>
+                <input type="text" class="form-control" id="apellidos" placeholder=<?php echo $cliente['surname'];?> disabled>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder=<?php echo $email;?> disabled>
+                <input type="email" class="form-control" id="email" placeholder=<?php echo $cliente['email'];?> disabled>
             </div>
             <div class="form-group">
                 <label for="genero">Género</label>
                 <select class="form-control" id="genero" disabled>
-                    <option value=""><?php echo $genero;?></option>
+                    <option value=""><?php echo $cliente['gender'];?></option>
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
                     <option value="otro">Otro</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="contraseña">Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" placeholder=<?php echo $contrasenia;?> disabled>
+                <label for="contraseña">Direccion</label>
+                <input type="text" class="form-control" id="direccion" placeholder=<?php echo $cliente['address'];?> disabled>
   
           </div>
 <?php   }
     else{?>
             <div class="form-group">
                 <label for="id">ID</label>
-                <input type="text" class="form-control" id="id" value=<?php echo $id;?> >
+                <input type="text" class="form-control" id="id" value=<?php echo $cliente['id'];?> >
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" value=<?php echo $nombre;?> >
+                <input type="text" class="form-control" id="nombre" value=<?php echo $cliente['name'];?> >
             </div>
             <div class="form-group">
                 <label for="apellidos">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" value=<?php echo $apellidos;?> >
+                <input type="text" class="form-control" id="apellidos" value=<?php echo $cliente['surname'];?> >
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" value=<?php echo $email;?> >
+                <input type="email" class="form-control" id="email" value=<?php echo $cliente['email'];?> >
             </div>
             <div class="form-group">
                 <label for="genero">Género</label>
                 <select class="form-control" id="genero" >
-                    <option value=""><?php echo $genero;?></option>
+                    <option value=""><?php echo $cliente['gender'];?></option>
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
                     <option value="otro">Otro</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="contraseña">Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" placeholder=<?php echo $contrasenia;?> >
+                <label for="contraseña">Direccion</label>
+                <input type="text" class="form-control" id="direccion" placeholder=<?php echo $cliente['address'];?> >
             </div>
 <?php   }
     
@@ -114,10 +97,11 @@ function valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia){ //Rec
     <div class="container my-4">
         <form action="indexCliente.php" method="post">
             <?php
-                valoraAccion($id,$nombre,$apellidos,$email,$genero,$contrasenia);
+                valoraAccion($cliente);
                 if($_GET["accion"]=="eliminar"){
-                    echo " <button type=\"submit\" class=\"btn btn-primary\">Eliminar</button>
-                           <button type=\"submit\" class=\"btn btn-primary\">Volver atras</button>";
+                    echo " <button type=\"submit\" class=\"btn btn-primary\">Eliminar</button>";
+                    eliminaCliente($cliente['id'],$_SESSION['data']);
+                          
                 }
                 else if ($_GET["accion"]== "verMas"){
                     echo "<button type=\"submit\" class=\"btn btn-primary\">Volver atras</button>";
