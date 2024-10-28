@@ -29,3 +29,6 @@ services:
       - db
     environment:
       PMA_HOST: db
+
+volumes:
+    mysql_data:

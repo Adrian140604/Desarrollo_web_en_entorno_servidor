@@ -9,7 +9,7 @@ Conexion exitosa
  $smt= $conexion->query($query);
  $clientes = $smt -> fetchAll(PDO::FETCH_ASSOC);
  foreach( $clientes as $row ) {
-    echo "Apellido: $row[apellido], Nombre: $row[nombre], Email: $row[email], ID: $row[id]";
+    echo "Apellido: $row[apellido], Nombre: $row[nombre], Email: $row[email], Genero: $row[genero],Direccion: $row[direccion], ID: $row[id]";
     echo "<br/>";
 
  }
