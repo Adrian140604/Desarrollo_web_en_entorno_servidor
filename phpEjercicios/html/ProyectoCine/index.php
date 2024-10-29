@@ -12,7 +12,7 @@
     ?>
 
     <?php
-        $query="SELECT * FROM pelicula";
+        $query="SELECT * FROM Pelicula";
         $stmt=$conexion->query($query);
         $clientes=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
