@@ -11,6 +11,5 @@ Conexion exitosa
  foreach( $clientes as $row ) {
     echo "Apellido: $row[apellido], Nombre: $row[nombre], Email: $row[email], Genero: $row[genero],Direccion: $row[direccion], ID: $row[id]";
     echo "<br/>";
-
  }
 ?>
