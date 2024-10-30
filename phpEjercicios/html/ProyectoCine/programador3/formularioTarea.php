@@ -8,37 +8,33 @@
     <link rel="stylesheet" href="../cabecera_footer.css">
 </head>
 <body>
-    <?php include "../cabecera.html"?>
+    
+    <?php 
+     include "../cabecera.html";
+     require_once("./disableOrNot.php");   
+     require_once("./funcionesTarea.php"); 
+     require_once("./ProyectoCine/database_cine.php");
+     $conexion = Database::getInstance()->getConnection();
+     $tareaBuscar=getTarea($_GET["id"],$conexion);
+
+    ?>
     <div class="container d-flex justify-content-center align-items-center h-100">
         <div class="card shadow-lg p-4 w-100" style="max-width: 600px;">
-            <h2 class="text-center mb-4">Dar de Alta una Tarea</h2>
+            <h2 class="text-center mb-4"><?php valoraAccion()?></h2>
             
-            <form action="procesar_pelicula.php" method="POST">
+            <form action="procesar_tarea.php" method="POST">
                 <div class="mb-3">
-                    <label for="Actor Principal" class="form-label">Actor Principal</label>
-                    <input type="text" class="form-control" id="Actor Principal" name="Actor Principal" placeholder="Actor Principal de la pelicula" required>
+                    <label for="Actor Principal" class="form-label">Tarea</label>
+                    <input type="text" class="form-control" id="Tarea" name="Tarea" value="<?php echo htmlspecialchars($tareaBuscar['tarea']) ?>" <?php disableOactive()?>>
                 </div>
                 <div class="mb-3">
-                    <label for="Actor Secundario" class="form-label">Actor Secundario</label>
-                    <input type="text" class="form-control" id="Actor Secundario" name="anio" placeholder="Actor Secundario" required>
+                    <label for="Sexo tarea" class="form-label">Sexo tarea</label>
+                    <input type="text" class="form-control" id="Sexo tarea" name="anio" value="<?php echo htmlspecialchars($tareaBuscar['sexo_tarea']) ?>"  <?php disableOactive()?>>
                 </div>
                 <div class="mb-3">
-                    <label for="Actriz Principal" class="form-label">Actriz Principal</label>
-                    <input type="text" class="form-control" id="Actriz Principal" name="Actriz Principal" placeholder="Actriz Principal de la pelicula">
+                    <label for="Salario Base" class="form-label">Salario Base</label>
+                    <input type="text" class="form-control" id="Salario Base" name="Salario Base" value="<?php echo htmlspecialchars($tareaBuscar['salario_base']) ?>"  <?php disableOactive()?>>
                 </div>
-                <div class="mb-3">
-                    <label for="ActrizSecundaria" class="form-label">Actriz Secundaria</label>
-                    <input type="text" class="form-control" id="ActrizSecundaria" name="ActrizSecundaria" placeholder="Actriz Secundaria de la pelicula" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Director" class="form-label">Director</label>
-                    <input type="text" class="form-control" id="Director" name="Director" placeholder="Director de la pelicula" required>
-                </div>
-                <div class="mb-3">
-                    <label for="Productor" class="form-label">Productor</label>
-                    <input type="text" class="form-control" id="Productor" name="Productor" placeholder="Productor de la pelicula" required>
-                </div>
-                
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Guardar Tarea</button>
                 </div>
